@@ -1,97 +1,244 @@
-jlox: A Tree-Walk Interpreter in Java
+☕ jlox: A Tree-Walk Interpreter in Java
 
-A Java implementation of Lox, a dynamically typed programming language, built by following "Crafting Interpreters" (https://craftinginterpreters.com/) by Robert Nystrom.
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-Java-orange?style=for-the-badge&logo=openjdk" alt="Java"/>
+  <img src="https://img.shields.io/badge/Project-Interpreter-blue?style=for-the-badge" alt="Interpreter"/>
+  <img src="https://img.shields.io/badge/Focus-Programming%20Languages-purple?style=for-the-badge" alt="Programming Languages"/>
+</p>jlox is a Java implementation of the Lox programming language, built by following "Crafting Interpreters" (https://craftinginterpreters.com/) by Robert Nystrom.
 
-This project explores how programming languages work internally, from lexical analysis and parsing to expression evaluation, environments, and control flow.
+This project explores how programming languages work internally, from scanning and parsing source code to evaluating expressions, managing variables, and executing programs.
 
-Overview
+«💡 A hands-on journey into programming language implementation, interpreters, and the fundamentals of language design.»
 
-jlox is a tree-walk interpreter written in Java. It reads Lox source code, parses it into an abstract syntax tree (AST), and evaluates the resulting expressions and statements.
+---
 
-The project was built as a hands-on exercise in programming language implementation, compiler fundamentals, and interpreter design.
+📌 Table of Contents
 
-Features
+- "Overview" (#-overview)
+- "Features" (#-features)
+- "Technologies" (#-technologies)
+- "Project Structure" (#-project-structure)
+- "Getting Started" (#-getting-started)
+- "Usage" (#-usage)
+- "Example Programs" (#-example-programs)
+- "Key Concepts" (#-key-concepts)
+- "Learning Reference" (#-learning-reference)
+- "Author" (#-author)
 
-The implementation follows the jlox interpreter developed in Crafting Interpreters.
+---
 
-- Lexical analysis: Converts source code into tokens.
-- Parsing: Builds an abstract syntax tree using recursive descent.
-- Expression evaluation: Evaluates arithmetic, comparison, logical, and other supported expressions.
-- Variables and environments: Handles variable declarations, assignment, and scope.
-- Control flow: Supports conditional statements and loops.
-- Functions: Supports user-defined functions, arguments, return values, and closures.
-- Classes and objects: Implements the class and object features supported by jlox.
-- Runtime error handling: Reports errors encountered during scanning, parsing, and execution.
+🚀 Overview
 
-The exact feature list should reflect the implementation currently present in your repository.
+jlox is a tree-walk interpreter for Lox. It processes source code through several stages before executing it:
 
-How It Works
+1. 🔎 Scanning: Converts source code into tokens.
+2. 🌳 Parsing: Converts tokens into an abstract syntax tree (AST).
+3. 🧠 Resolution: Resolves variable references and lexical scope.
+4. ⚙️ Interpretation: Evaluates expressions and executes statements.
 
-The interpreter processes source code through several stages:
+The implementation brings together fundamental programming language concepts, including recursive-descent parsing, environments, closures, functions, classes, and inheritance.
 
-1. Source code: Receives Lox code from a file or interactive prompt.
-2. Scanner: Converts characters into tokens.
-3. Parser: Transforms tokens into an abstract syntax tree.
-4. Interpreter: Evaluates expressions and executes statements.
-5. Environment: Maintains variables, scope, and runtime bindings.
+✨ Features
 
-Example
+- 🔎 Lexical Analysis: Tokenizes source code using a scanner.
+- 🌳 Recursive-Descent Parsing: Parses expressions and statements according to the language grammar.
+- 🧩 Abstract Syntax Trees: Represents expressions and statements using structured AST nodes.
+- ➕ Expressions and Operators: Supports arithmetic, comparison, equality, and logical operations.
+- 📦 Variables and Scope: Implements declarations, assignments, blocks, and lexical scoping.
+- 🔀 Control Flow: Supports "if", "else", "while", and "for" statements.
+- ⚙️ Functions: Supports function declarations, calls, arguments, and return values.
+- 🔗 Closures: Allows functions to retain access to their surrounding lexical environment.
+- 🏛️ Classes and Objects: Implements classes, instances, and methods.
+- 🧬 Inheritance: Supports subclasses and superclass method access through "super".
+- 👤 Method Binding: Supports the "this" keyword.
+- 🧠 Static Resolution: Uses a resolver to determine variable bindings.
+- ⚠️ Error Handling: Handles scanning, parsing, and runtime errors.
 
-fun fibonacci(n) {
-  if (n <= 1) return n;
-  return fibonacci(n - 2) + fibonacci(n - 1);
+🛠️ Technologies
+
+Technology| Purpose
+☕ Java| Implementation language
+🌳 Recursive-descent parsing| Syntax analysis
+🧩 Abstract Syntax Tree (AST)| Program representation
+⚙️ Tree-walk interpretation| Program execution
+🐙 Git and GitHub| Version control and project hosting
+
+📂 Project Structure
+
+The core interpreter implementation is organized under "com/craftinginterpreters/lox/".
+
+com/craftinginterpreters/lox/
+├── Lox.java           # Entry point and error reporting
+├── Scanner.java       # Lexical analysis
+├── Token.java         # Token representation
+├── TokenType.java     # Token types
+├── Parser.java        # Recursive-descent parser
+├── Expr.java          # Expression AST nodes
+├── Stmt.java          # Statement AST nodes
+├── Interpreter.java   # Tree-walk interpreter
+├── Environment.java   # Variable environments and scope
+├── Resolver.java      # Static variable resolution
+├── LoxCallable.java   # Callable object interface
+├── LoxFunction.java   # User-defined functions
+├── LoxClass.java      # Class representation
+├── LoxInstance.java   # Class instances
+├── RuntimeError.java  # Runtime error handling
+└── Return.java        # Return statement control flow
+
+💻 Getting Started
+
+📋 Prerequisites
+
+Make sure you have the following installed:
+
+- Java Development Kit (JDK)
+- Java compiler ("javac")
+- Java runtime ("java")
+- A terminal or command prompt
+
+1️⃣ Clone the Repository
+
+git clone https://github.com/danielking-debug/craftinginterpreters.git
+cd craftinginterpreters
+
+2️⃣ Compile the Interpreter
+
+From the directory containing the "com/" folder, run:
+
+javac com/craftinginterpreters/lox/*.java
+
+3️⃣ Start the Interactive Interpreter
+
+java com.craftinginterpreters.lox.Lox
+
+You can now enter Lox statements directly into the interactive interpreter.
+
+🎮 Usage
+
+👋 Hello, Lox!
+
+print "Hello, Lox!";
+print 10 + 20;
+
+Output:
+
+Hello, Lox!
+30
+
+📄 Run a Lox Script
+
+Create a file named "hello.lox":
+
+var language = "Lox";
+print "Hello from " + language + "!";
+
+Execute the script from the project root:
+
+java com.craftinginterpreters.lox.Lox hello.lox
+
+Output:
+
+Hello from Lox!
+
+🧪 Example Programs
+
+1. 📦 Variables and Control Flow
+
+var language = "Lox";
+var version = 1;
+
+if (version == 1) {
+  print "Learning " + language;
 }
 
-print fibonacci(10);
+Output:
 
-Expected output:
+Learning Lox
 
-55
+2. 🔗 Functions and Closures
 
-Technologies
+fun makeCounter() {
+  var count = 0;
 
-- Java
-- Object-oriented programming
-- Recursive descent parsing
-- Abstract syntax trees (ASTs)
-- Tree-walk interpretation
-- Runtime environments and lexical scoping
+  fun increment() {
+    count = count + 1;
+    print count;
+  }
 
-Getting Started
+  return increment;
+}
 
-Prerequisites
+var counter = makeCounter();
 
-- A compatible Java Development Kit (JDK).
-- The source code and build instructions for this repository.
+counter();
+counter();
+counter();
 
-Installation
+Output:
 
-Clone the repository:
+1
+2
+3
 
-git clone https://github.com/YOUR_USERNAME/jlox.git
-cd jlox
+What this demonstrates: The "increment" function retains access to the "count" variable from its enclosing function, even after "makeCounter()" has returned.
 
-Compile and run the interpreter using the build process configured in the project.
+3. 🧬 Classes and Inheritance
 
-For example, if your project uses plain Java source files, the compilation and execution commands will depend on its package structure and entry point.
+class Doughnut {
+  cook() {
+    print "Fry until golden brown.";
+  }
+}
 
-What I Learned
+class BostonCream < Doughnut {
+  cook() {
+    super.cook();
+    print "Add custard and chocolate.";
+  }
+}
 
-Building jlox helped me explore:
+BostonCream().cook();
 
-- How source code becomes executable behavior.
-- How scanners and parsers recognize programming language syntax.
-- How abstract syntax trees represent expressions and statements.
-- How interpreters evaluate expressions and manage runtime state.
-- How lexical scope, closures, functions, and object-oriented features work internally.
-- How to translate language specifications into working software.
+Output:
 
-Reference
+Fry until golden brown.
+Add custard and chocolate.
 
-Robert Nystrom, "Crafting Interpreters" (https://craftinginterpreters.com/).
+What this demonstrates: A subclass inherits behavior from its superclass and can invoke the superclass implementation using "super".
 
-This project is an educational implementation inspired by the book.
+🧠 Key Concepts Explored
 
-License
+Building jlox provides practical experience with:
 
-See the repository's license file for the applicable terms.
+- Language Implementation: Understanding how source code becomes executable behavior.
+- Lexical Analysis: Identifying keywords, operators, literals, and identifiers.
+- Parsing: Translating tokens into a structured representation of a program.
+- Interpreter Design: Evaluating expressions and executing statements.
+- Environments and Scope: Managing variables, assignments, and lexical scope.
+- Closures: Preserving access to variables across function calls.
+- Object-Oriented Language Features: Implementing classes, methods, instances, and inheritance.
+- Static Resolution: Resolving variable references before interpretation.
+- Error Handling: Identifying and reporting errors during different stages of execution.
+
+📚 Learning Reference
+
+This project follows the Java interpreter implementation in:
+
+"Crafting Interpreters" (https://craftinginterpreters.com/)
+
+Author: Robert Nystrom
+
+The book serves as the primary learning reference for the interpreter's design and implementation.
+
+👨‍💻 Author
+
+Daniel Oche
+
+- 🐙 GitHub: "@danielking-debug" (https://github.com/danielking-debug)
+- 📂 Repository: "craftinginterpreters" (https://github.com/danielking-debug/craftinginterpreters)
+
+---
+
+<p align="center">
+  <b>☕ Built with Java, curiosity, and a deeper interest in how programming languages work.</b>
+</p>
